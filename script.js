@@ -1,13 +1,12 @@
 "use strict";
-const score0El = document.querySelector(".score--0");
-const scoreEl = document.querySelector(".score--1");
+const score0El = document.querySelector("#score--0");
+const score6El = document.getElementById("score--1");
 const diceEl = document.querySelector(".dice");
 const btnRoll = document.querySelector(".btn--roll");
 const btnNew = document.querySelector(".btn--new");
 const btnHold = document.querySelector(".btn--hold");
 
-
-const score = [0,0]
+const score = [0, 0];
 
 score0El.textContent = 0;
 score6El.textContent = 0;
@@ -16,28 +15,49 @@ let activePlayer = 0;
 
 diceEl.classList.add("hidden");
 
-
-
 // Rolling Button
 btnRoll.addEventListener("click", function () {
   // 3. check for a rolled 1; if true switch to next player
   let number = Math.floor(Math.random() * 6) + 1;
   diceEl.classList.remove("hidden");
-  
+
   console.log(number);
-  console.log(activePlayer + ' this is the current player')
+  console.log(activePlayer + " this is the current player");
 
 
-if (number === 1) {
-activePlayer ++;
-} else {
-    currentScore = currentScore + number;
-    diceEl.src = `/dice-${number}.png`;
-    score0El.textContent = currentScore;
+  if (activePlayer === 0) {
+    if (number === 1) {
+        currentScore = 0
+        diceEl.src = `/dice-${number}.png`;
+        document.getElementById(`score--${activePlayer}`).textContent =
+        currentScore;
+        activePlayer++;
+     
+    } else {
+      currentScore = currentScore + number;
+      diceEl.src = `/dice-${number}.png`;
+      document.getElementById(`score--${activePlayer}`).textContent =
+        currentScore;
+    }
+  } else 
+  {
+    if (number === 1) {
+        currentScore = 0
+        diceEl.src = `/dice-${number}.png`;
+        document.getElementById(`score--${activePlayer}`).textContent =
+        currentScore;
+        activePlayer--;
+        
 
-}
-
- 
+       
+      } else {
+        currentScore = currentScore + number;
+        diceEl.src = `/dice-${number}.png`;
+        document.getElementById(`score--${activePlayer}`).textContent =
+          currentScore;
+      }
+  }
+  console.log(currentScore)
 
   //   switch (number) {
   //     case 1:
