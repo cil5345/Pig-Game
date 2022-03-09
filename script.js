@@ -18,6 +18,7 @@ score0El.textContent = 0;
 score6El.textContent = 0;
 let currentScore = 0;
 let activePlayer = 0;
+let gameOn = true
 
 
 
@@ -25,6 +26,7 @@ diceEl.classList.add("hidden");
 
 // Rolling Button
 btnRoll.addEventListener("click", function () {
+    if(gameOn) {
   // 3. check for a rolled 1; if true switch to next player
   let number = Math.floor(Math.random() * 6) + 1;
   diceEl.classList.remove("hidden");
@@ -71,7 +73,7 @@ btnRoll.addEventListener("click", function () {
   }
   console.log(currentScore)
 
- 
+}
 });
 
 
@@ -79,9 +81,13 @@ btnRoll.addEventListener("click", function () {
 
 btnHold.addEventListener("click", function () {
 score[activePlayer] += currentScore
+if (gameOn) {
+    
+
 
 if (score[activePlayer] >= 100 ) {
     console.log(`player ${activePlayer} wins!`)
+    gameOn = false
 } else {
 
 
@@ -97,7 +103,7 @@ document.querySelector(`.player--${activePlayer}`).classList.toggle('player--act
 }
 
 
-
+}
 
 });
 
